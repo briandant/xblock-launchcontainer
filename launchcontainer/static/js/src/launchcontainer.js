@@ -10,12 +10,23 @@ function LaunchContainerXBlock(runtime, element) {
 
     $(document).ready(
       function () {
-        var $launcher = $('#launcher1'), $launch_button = $launcher.find('input');
+        var $launcher = $('#launcher1'); 
+        var $launch_button = $launcher.find('#launcher_submit');
+        var $owner_email = "{{ user_email }}"; 
+        if ($owner_email == "None") { 
+          $launcher.find('#launcher_email').removeClass('hide');
+        };
+
         $launch_button.click(function() {
             console.log('Clicked launch button');
+            console.log($owner_email);
             $launch_button.attr('disabled', 'disabled').val('Launching...');
+            if ($owner_email == undefined) { 
+              console.log("yep it failed");
+              var $owner_email = $launcher.find('#launcher_email').val();
+            };
             $launcher.find('iframe')[0].contentWindow.postMessage({
-                owner_email: "{{ user_email }}",
+                owner_email: $owner_email,
                 project: "{{ project }}"
             }, "{{ API_url }}");
             return false;
