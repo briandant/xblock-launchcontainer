@@ -1,6 +1,6 @@
 {% load i18n %}
 <div class="wrapper-comp-settings is-active editor-with-buttons" id="settings-tab">
-  <div class="ui-state-error" id="error-message"></div>
+  <div class="ui-state-error" id="notification-message"></div>
 
   <ul class="list-input settings-list" style="height: auto">
     {% for field, value, validator in fields %}
@@ -16,6 +16,10 @@
     </li>
     {% endfor %}
   </ul>
+  <p class="emphasis">
+    Should it prove useful for debugging purposes, the endpoint that this project will 
+    post to is {{ API_url }}.
+  </p>
 </div>
 <div class="xblock-actions">
   <ul>
